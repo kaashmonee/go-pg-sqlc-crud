@@ -9,6 +9,7 @@ import (
 	"github.com/kaashmonee/go-pg-sqlc-crud/crud"
 )
 
+// Replace this here with your own schema or modify this code to read from a schema dump file
 const examplePgSchemaDump = `
 CREATE TABLE public.users (
     id uuid NOT NULL DEFAULT gen_random_uuid(),

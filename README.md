@@ -1,15 +1,60 @@
-# go-pg-sqlc-crud
+# sqlc-crud
 
-goal is to build an AST and generate postgres CRUD statements for each table based on the pg_dump of the database
+A CLI tool to generate [SQLC](https://sqlc.dev/)-compatible CRUD operations from PostgreSQL schemas.
 
-### note
+## Built With
 
-* to be completely transparent and up-front about attribution, this code is written with the help of AI tools, including but not limited to:
-  * continue.dev
-  * mistral codestral
-  * claude 3.5 sonnet
+This tool is made possible by these excellent projects:
 
-* the correctness of this tool is only guaranteed to the extent that the code is unit tested
-* but please note: NO code is _generated_ with the help of any AI tools: it's consistently deterministically generated
-  by building an AST and parsing it. as a result, the code should be syntactically correct and compile as needed
-* the code is generated as `schema.crud.sql`
+### Core Dependencies
+
+- [sqlc](https://github.com/sqlc-dev/sqlc) - The SQL compiler that makes this useful
+- [pg_query_go](https://github.com/pganalyze/pg_query_go) - PostgreSQL parser from pganalyze
+- [Go 1.23](https://go.dev/) - The Go programming language
+
+### Development Tools
+
+- [Claude 3.5 Sonnet](https://www.anthropic.com/claude) - AI assistant used for development
+- [VSCode](https://code.visualstudio.com/) - Code editor
+- [continue.dev](https://continue.dev/) - AI coding assistant
+
+Special thanks to all the teams and contributors behind these tools.
+
+## Installation
+
+```bash
+go install github.com/kaashmonee/go-pg-sqlc-crud@latest
+```
+
+## Usage
+
+```bash
+sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sql
+```
+
+## Flags
+
+- `-schema`: Path to the PostgreSQL schema dump file (required)
+- `-output`: Path where the generated CRUD file should be written (required)
+
+## Example
+
+```bash
+# Generate CRUD operations from a schema file
+sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql
+```
+
+## How It Works
+
+1. Takes a PostgreSQL schema dump as input
+2. Uses pg_query_go to parse the schema into an AST
+3. Generates SQLC-compatible CRUD queries
+4. Writes the queries to the specified output file
+
+## License
+
+MIT License - see the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.

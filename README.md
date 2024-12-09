@@ -2,10 +2,6 @@
 
 goal is to build an AST and generate postgres CRUD statements for each table based on the pg_dump of the database
 
-## current progress so far
-
-1. builds the AST and pretty prints the Postgres AST in color
-
 ### note
 
 * to be completely transparent and up-front about attribution, this code is written with the help of AI tools, including but not limited to:

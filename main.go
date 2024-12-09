@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/kaashmonee/go-pg-sqlc-crud/util"
 	pgquery "github.com/pganalyze/pg_query_go/v6"
+
+	"github.com/kaashmonee/go-pg-sqlc-crud/crud"
 )
 
 const examplePgSchemaDump = `
@@ -45,9 +46,6 @@ CREATE TABLE public.sessions (
 `
 
 func main() {
-	// takes in postgres schema dump and generates sqlc crud stubs
-	// uses an ast to parse the schema dump and generate the stubs
-
 	fmt.Println("building the AST")
 	tree, err := pgquery.ParseToJSON(examplePgSchemaDump)
 	if err != nil {
@@ -55,12 +53,31 @@ func main() {
 		os.Exit(1)
 	}
 
-	prettyJson, err := util.JsonStringPrettyPrint([]byte(tree))
+	// Debug: Print the raw tree
+	fmt.Println("Raw AST:")
+	fmt.Println(tree)
+
+	crud, err := crud.GenerateCRUD(tree)
 	if err != nil {
 		fmt.Println("error:", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("pretty printed JSON:")
-	fmt.Println(string(prettyJson))
+	// Debug: Print the CRUD content
+	fmt.Println("Generated CRUD content:")
+	fmt.Println(crud)
+
+	// Create the generated directory if it doesn't exist
+	if err := os.MkdirAll("generated", 0755); err != nil {
+		fmt.Println("error creating directory:", err)
+		os.Exit(1)
+	}
+
+	// Write the CRUD to file
+	if err := os.WriteFile("generated/schema.crud.sql", []byte(crud), 0644); err != nil {
+		fmt.Println("error writing file:", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Successfully generated CRUD operations in generated/schema.crud.sql")
 }

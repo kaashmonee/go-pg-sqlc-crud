@@ -4,7 +4,7 @@ A CLI tool to generate [SQLC](https://sqlc.dev/)-compatible CRUD operations from
 
 ## Built With
 
-This tool is made possible by these excellent projects:
+Most of the code was written with the assistance of Claude 3.5 Sonnet. This tool is made possible by:
 
 ### Core Dependencies
 
@@ -14,7 +14,7 @@ This tool is made possible by these excellent projects:
 
 ### Development Tools
 
-- [Claude 3.5 Sonnet](https://www.anthropic.com/claude) - AI assistant used for development
+- [Claude 3.5 Sonnet](https://www.anthropic.com/claude) - Primary coding assistant
 - [VSCode](https://code.visualstudio.com/) - Code editor
 - [continue.dev](https://continue.dev/) - AI coding assistant
 

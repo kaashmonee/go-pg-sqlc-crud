@@ -1,4 +1,4 @@
-# sqlc-crud
+# go-pg-sqlc-crud
 
 A CLI tool to generate [SQLC](https://sqlc.dev/)-compatible CRUD operations from PostgreSQL schemas.
 

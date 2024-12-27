@@ -29,7 +29,7 @@ go install github.com/kaashmonee/go-pg-sqlc-crud@latest
 ## Usage
 
 ```bash
-sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sql
+go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sql
 ```
 
 ## Flags
@@ -41,7 +41,7 @@ sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sql
 
 ```bash
 # Generate CRUD operations from a schema file
-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql
+go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql
 ```
 
 ## How It Works

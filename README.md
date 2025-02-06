@@ -37,12 +37,18 @@ go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sq
 - `-schema`: Path to the PostgreSQL schema dump file (required)
 - `-output`: Path where the generated CRUD file should be written (required)
 
-## Example
+## Try it yourself
 
-```bash
-# Generate CRUD operations from a schema file
-go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql
-```
+1. Clone the repo
+2. `cd example`
+3. `docker compose up`
+4. `pg_dump ...`
+5. Run `go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql`
+6. Copy the `crud.sql` over to the directory you've bootstrapped `sqlc` into
+7. Make sure it's included in `sqlc.yaml`
+8. Run `sqlc generate`
+9. If this runs and succeeds, then congrats, the tool works
+10. Please LMK or create a PR if you find bugs! TY
 
 ## How It Works
 

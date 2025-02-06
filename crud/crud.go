@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strings"
 	"text/template"
 )
@@ -87,6 +88,9 @@ func GenerateCRUD(tree string) (string, error) {
 		"add": func(a, b int) int {
 			return a + b
 		},
+		"last": func(x int, a interface{}) bool {
+			return x == reflect.ValueOf(a).Len()-1
+		},
 	}
 	tmpl := template.Must(template.New("crud").Funcs(funcMap).Parse(`
   -- {{ .Schema }}.{{ .Name }} CRUD Operations
@@ -108,7 +112,7 @@ func GenerateCRUD(tree string) (string, error) {
 	{{- if ne $c "id" }}
 	{{- if ne $c "created_at" }}
 	{{- if ne $c "updated_at" }}
-	{{ $c }},
+	{{ $c }}{{ if not (last $i $.Columns) }},{{ end }}
 	{{- end }}
 	{{- end }}
 	{{- end }}
@@ -120,7 +124,7 @@ func GenerateCRUD(tree string) (string, error) {
 	{{- if ne $c "id" }}
 	{{- if ne $c "created_at" }}
 	{{- if ne $c "updated_at" }}
-	${{ $count }},
+	${{ $count }}{{ if not (last $i $.Columns) }},{{ end }}
 	{{- $count = add $count 1 }}
 	{{- end }}
 	{{- end }}
@@ -135,11 +139,10 @@ func GenerateCRUD(tree string) (string, error) {
 	{{- range $i, $c := .Columns }}
 	{{- if ne $c "id" }}
 	{{- if ne $c "created_at" }}
-	{{ $c }} = ${{ add $i 1 }},
+	{{ $c }} = ${{ add $i 1 }}{{ if not (last $i $.Columns) }},{{ end }}
 	{{- end }}
 	{{- end }}
 	{{- end }}
-	updated_at = now()
   WHERE id = $1
   RETURNING {{ range $i, $c := .Columns }}{{ if $i }}, {{ end }}{{ $c }}{{ end }};
   

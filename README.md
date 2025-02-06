@@ -37,12 +37,14 @@ go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sq
 - `-schema`: Path to the PostgreSQL schema dump file (required)
 - `-output`: Path where the generated CRUD file should be written (required)
 
-## Example
+## Try it yourself
 
-```bash
-# Generate CRUD operations from a schema file
-go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql
-```
+1. Clone the repo
+2. `cd example`
+3. `docker compose up`
+4. `pg_dump ...`
+5. Run `go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql`
+6. Hopefully this works
 
 ## How It Works
 

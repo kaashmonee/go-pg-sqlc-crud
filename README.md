@@ -44,7 +44,11 @@ go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/schema.crud.sq
 3. `docker compose up`
 4. `pg_dump ...`
 5. Run `go-pg-sqlc-crud generate -schema ./schema.sql -output ./generated/crud.sql`
-6. Hopefully this works
+6. Copy the `crud.sql` over to the directory you've bootstrapped `sqlc` into
+7. Make sure it's included in `sqlc.yaml`
+8. Run `sqlc generate`
+9. If this runs and succeeds, then congrats, the tool works
+10. Please LMK or create a PR if you find bugs! TY
 
 ## How It Works
 
